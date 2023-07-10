@@ -1,0 +1,497 @@
+.home {
+    background: linear-gradient(105.3deg, rgb(30, 39, 107) 21.8%, rgb(77, 118, 221) 100.2%);
+}
+
+.news {
+    background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
+    background-color: red;
+}
+
+.play {
+    background: linear-gradient(to right, rgb(0, 180, 219), rgb(0, 131, 176));
+}
+
+.specials {
+    background: linear-gradient(to top, rgb(9, 32, 63) 0%, rgb(83, 120, 149) 100%);
+}
+
+.credits {
+    background: rgb(223, 228, 234);
+}
+
+.player {
+    background: linear-gradient(90deg, #020024 0, #093f79 28%, #230041 100%);
+    position: relative;
+}
+
+.full-height {
+    min-height: 100vh;
+}
+
+.title {
+    width: 100%;
+    align-items: center;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    color: rgba(0, 0, 0, .2);
+    text-transform: uppercase;
+    letter-spacing: 5pt;
+    padding: 40px 0;
+    font-weight: 700;
+}
+
+.separator {
+    width: 100%;
+    height: 120px;
+}
+
+/* Credits screen */
+
+.managedBy {
+    text-align: center;
+    color: black;
+    padding: 0 20px;
+    font-weight: 700;
+}
+
+.managedBy a {
+    color: #08d;
+    text-decoration: none;
+}
+
+
+/* Home Screen */
+
+.container {
+    display: block;
+}
+
+.home-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.home-heading {
+    font-size: 40px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 75%;
+    }
+}
+
+.home-livestream {
+    padding: 0 20px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.twitchbox {
+    width: 50%;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.home-flex-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.twitch {
+    background-color: black;
+    padding: 50px;
+    margin-bottom: 15px;
+}
+
+.twitch-video {
+    height: 600px;
+    width: 100%;
+}
+
+
+/* Specials Screen */
+
+.specials-content {
+    padding: 25px 30px;
+}
+
+.specials-grid {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+
+.special-card-container {
+    text-decoration: none;
+    transition: transform 0.3s ease-in;
+}
+
+.special-card-container:hover {
+    transform: scale(1.04);
+}
+
+.special-card {
+    margin: 15px 0;
+    box-shadow: 0 0 20px 0 #000;
+    border-radius: 15px;
+    width: 300px;
+}
+
+.special-card-metadata {
+    margin-top: -1px;
+    z-index: 5;
+    bottom: 0;
+    width: 100%;
+    background: #00639c;
+    padding: 15px 20px;
+    color: #000 !important;
+    border-radius: 0 0 15px 15px;
+}
+
+.special-title {
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    white-space: wrap;
+}
+
+.episode-time {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.special-thumbnail {
+    width: 300px;
+    height: 170px;
+    position: relative;
+    margin: 0;
+}
+
+.special-thumbnail-gradient {
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.3) 100%);
+    position: absolute;
+    bottom: 0;
+    pointer-events: none;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.special-thumbnail-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 15px 0 0;
+    object-fit: cover;
+}
+
+/* Play Screen */
+
+.season-menu {
+    height: auto;
+    padding: 0;
+    width: 100%;
+    background: rgb(15 89 162);
+    min-height: 76px;
+    color: rgba(255, 255, 255, .8);
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    align-items: center;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    justify-content: center;
+}
+
+
+.season-list {
+    width: 80px;
+}
+
+ul>li {
+    display: inline-block;
+    margin-left: 0;
+    cursor: pointer;
+    overflow: visible;
+    height: 50px;
+    width: 110px;
+    text-align: center;
+    line-height: 50px;
+}
+
+ul {
+    list-style: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.episode-card {
+    margin: 15px 0;
+    border-radius: 15px;
+    width: 300px;
+}
+
+.seasonNo {
+    display: block;
+    margin: 10px 0;
+    text-transform: uppercase;
+    color: #fff !important;
+    font-family: 'Montserrat';
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+
+/* HomeCard */
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 15px;
+    margin: 15px 0;
+    transition: transform 0.3s ease-in;
+    border: none;
+    overflow: hidden;
+    display: block;
+}
+
+.card:hover {
+    transform: scale(1.04);
+    border: none;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    border-radius: 15px;
+    position: relative;
+}
+
+.card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    display: flex;
+    /* Use flexbox for centering */
+    align-items: center;
+    /* Vertically center the content */
+    justify-content: center;
+    /* Horizontally center the content */
+}
+
+.card-title {
+    font-size: 40px;
+}
+
+.card-tele {
+    font-size: 24px;
+}
+
+/* Watch panel */
+
+.flag {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mainflag {
+    width: 38px;
+    height: 26px;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+    right: 20px;
+    top: 20px;
+    position: absolute;
+}
+
+.langselector {
+    display: block;
+    position: relative;
+}
+
+.langchooser {
+    position: absolute;
+    right: 0px;
+    top: 55px;
+    display: none;
+    list-style: none;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.langbutton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.langitem {
+    cursor: pointer;
+    color: #000;
+    font-size: 13px;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    font-weight: 800;
+    user-select: none;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.langitem:hover {
+    background-color: #f01010;
+}
+
+.menuflag {
+    margin-top: -3px;
+    margin-right: 15px;
+    vertical-align: middle;
+    border-style: none;
+    width: 25px;
+    height: 16px;
+}
+
+.videoinfo {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.videometainfo {
+    font-size: 1.1rem !important;
+    display: inline;
+    padding-right: 2px;
+    font-weight: 400;
+}
+
+.videoepisodetitle {
+    font-size: 36px !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 4px 9px rgb(6 53 48 / 25%);
+}
+
+.videoshowtitle {
+    font-weight: 400;
+    font-size: 1.375rem !important;
+    text-shadow: 0 4px 9px rgb(6 53 48 / 25%);
+}
+
+.videoinfocontainer {
+    width: 100%;
+    margin-left: 120px;
+    max-width: 1140px;
+    /* font-weight: 500; */
+}
+
+/* @media (min-width: 1200px) {
+    .videoinfocontainer {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 992px) {
+    .videoinfocontainer {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 768px) {
+    .videoinfocontainer {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 576px) {
+    .videoinfocontainer {
+        max-width: 540px;
+    }
+} */
+
+.videoarea {
+    width: -webkit-fill-available;
+}
+
+@media only screen and (min-width: 600px) {
+    #videoarea {
+        padding: 0 15% 0 15%;
+    }
+}
+
+.video {
+    width: 100%;
+}
+
+.videoplayer {
+    padding-top: 0 !important;
+    max-width: 100%;
+    height: 100vh;
+    /* border: 1px solid grey; */
+}
+
+.backbutton {
+    background-color: transparent;
+    border: 3px solid #004477;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 9px;
+    outline: 0 !important;
+}
+
+.backbutton:hover {
+    transition: background 1s;
+    border: 3px solid #067;
+    background: #068;
+}
+
+.arrowicon{
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.buttoncontainer{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 100px;
+}

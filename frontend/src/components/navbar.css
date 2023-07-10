@@ -1,0 +1,93 @@
+/* Navbar */
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #141924;
+    z-index: 1;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .list-wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .list-wrap li.active {
+    position: relative;
+  }
+
+  .list-wrap li.active::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px; /* Adjust the size of the circle as per your requirement */
+    height: 50px; /* Adjust the size of the circle as per your requirement */
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 2;
+    transform: translate(-50%, -50%) translateY(-9px);
+    animation-name: raiseCircle;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in;
+  }
+
+  @keyframes raiseCircle {
+    0% {
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%) translateY(-9px);
+      opacity: 1;
+    }
+  }
+
+  .list-wrap li ion-icon {
+    font-size: 1.5em;
+    color: #a4b0be;
+    background-color: transparent;
+    z-index: 3;
+  }
+
+  .list-wrap li.active ion-icon {
+    color: #141924;
+    position: relative;
+    z-index: 4;
+    transform: translateY(-5px);
+    transition: transform 0.4s ease-in;
+  }
+
+  .list-wrap li.active.home::before {
+    background-color: #537895; /* Adjust the background color for the active home icon */
+    z-index: 2;
+  }
+
+  .list-wrap li.active.news::before {
+    background-color: #ff6b81; /* Adjust the background color for the active home icon */
+    z-index: 2;
+  }
+
+  .list-wrap li.active.play::before {
+    background-color: #7bed9f; /* Adjust the background color for the active home icon */
+    z-index: 2;
+  }
+
+  .list-wrap li.active.specials::before {
+    background-color: #70a1ff; /* Adjust the background color for the active home icon */
+    z-index: 2;
+  }
+
+  .list-wrap li.active.credits::before {
+    background-color: #dfe4ea;
+    z-index: 2;
+  }

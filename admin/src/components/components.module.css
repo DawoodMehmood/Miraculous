@@ -1,0 +1,135 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    background-color: rgb(102, 194, 254);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-container label {
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 10px;
+  }
+
+  .form-container textarea{
+    height: 150px;
+  }
+
+
+  .form-container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .form-container button:hover {
+    background-color: #0056b3;
+
+  }
+
+  .heading{
+    text-align: center;
+  }
+
+  .cardContainer {
+    display: grid;
+    gap: 1rem;
+    margin: 0 2rem;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+  }
+
+  .cardButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .editButton {
+    font-size: 1.2rem !important;
+    margin-right: 0.5rem !important;
+    color: #007bff !important;
+  }
+
+  .deleteButton {
+    font-size: 1.2rem !important;
+    color: red !important;
+  }
+
+
+  .updateform-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .updateform-container form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .updateform-container label {
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .updateform-container input,
+  .updateform-container select,
+  .updateform-container textarea {
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 4px;
+  }
+
+  .updateform-container textarea{
+    height: 100px;
+  }
+
+
+  .updateform-container button {
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .updateform-container button:hover {
+    background-color: #0056b3;
+  }

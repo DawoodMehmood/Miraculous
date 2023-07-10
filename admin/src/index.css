@@ -1,0 +1,11 @@
+body {
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: 'Monsterrat',sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
