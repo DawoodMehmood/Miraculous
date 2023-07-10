@@ -37,7 +37,8 @@
   }
 
   .form-container textarea{
-    height: 150px;
+    height: 100px;
+    resize: none;
   }
 
 
@@ -117,6 +118,7 @@
 
   .updateform-container textarea{
     height: 100px;
+    resize: none;
   }
 
 

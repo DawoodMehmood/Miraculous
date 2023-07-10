@@ -150,7 +150,7 @@ function Languages() {
             <ToastContainer />
 
             <div>
-                <h2 className={styles.heading}>Languages</h2>
+                <h2 className={styles.heading}>All Languages</h2>
                 <div className={styles.cardContainer}>
                     {languages.map((language) => (
                         <div className={styles.card} key={language.id}>

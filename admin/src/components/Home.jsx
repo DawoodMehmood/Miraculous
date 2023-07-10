@@ -6,22 +6,53 @@ import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import styles from "./components.module.css";
-import BASE_URL from '../../config';
+import BASE_URL from "../../config";
 
 function Home() {
     const [episodes, setEpisodes] = useState([]);
     const [editingEpisode, setEditingEpisode] = useState(null);
+    const [languageNames, setLanguageNames] = useState({});
 
     useEffect(() => {
+        const fetchLanguageNames = async (episodes) => {
+            try {
+                const languageIds = episodes.map((episode) => episode.language_id);
+                const uniqueLanguageIds = [...new Set(languageIds)];
+
+                const languageNamesData = await Promise.all(
+                    uniqueLanguageIds.map((id) => fetchLanguageName(id))
+                );
+
+                const languageNamesMap = {};
+                languageNamesData.forEach((languageName, index) => {
+                    const languageId = uniqueLanguageIds[index];
+                    languageNamesMap[languageId] = languageName;
+                });
+
+                setLanguageNames(languageNamesMap);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const fetchLanguageName = async (id) => {
+            try {
+                const response = await axios.get(`${BASE_URL}/api/languages/${id}`);
+                return response.data.name;
+            } catch (error) {
+                console.error(error);
+                return "Unknown Language";
+            }
+        };
+
         const fetchData = async () => {
             try {
-                const response = await axios.get(
-                    `${BASE_URL}/api/videos`
-                );
+                const response = await axios.get(`${BASE_URL}/api/videos`);
                 const filteredEpisodes = response.data.filter(
                     (video) => video.episode_type === "home"
                 );
                 setEpisodes(filteredEpisodes);
+                fetchLanguageNames(filteredEpisodes);
             } catch (error) {
                 console.error(error);
             }
@@ -29,6 +60,7 @@ function Home() {
 
         fetchData();
     }, []);
+
 
     const handleEdit = (episode) => {
         setEditingEpisode(episode);
@@ -120,6 +152,18 @@ function Home() {
                                     <ToastContainer />
                                 </div>
                                 <p>
+                                    <strong>Meta Title:</strong>{" "}
+                                    {episode.meta_title}
+                                </p>
+                                <p>
+                                    <strong>Meta Description:</strong>{" "}
+                                    {episode.meta_description}
+                                </p>
+                                <p>
+                                    <strong>Language:</strong>{" "}
+                                    {languageNames[episode.language_id]}
+                                </p>
+                                <p>
                                     <strong>Season No:</strong>{" "}
                                     {episode.season_no}
                                 </p>
@@ -169,6 +213,12 @@ function Home() {
 }
 
 function EditForm({ episode, onUpdate }) {
+    const [metaTitle, setMetaTitle] = useState(episode.meta_title);
+    const [metaDesc, setMetaDesc] = useState(episode.meta_description);
+    const [languages, setLanguages] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState(
+        episode.language_id
+    );
     const [seasonNo, setSeasonNo] = useState(episode.season_no);
     const [episodeNo, setEpisodeNo] = useState(episode.episode_no);
     const [episodeTitle, setEpisodeTitle] = useState(episode.episode_title);
@@ -188,6 +238,29 @@ function EditForm({ episode, onUpdate }) {
         episode.article_description
     );
 
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/api/languages`);
+                setLanguages(response.data);
+
+                // Find the language object with the matching language_id
+                const selectedLanguageObject = response.data.find(
+                    (language) => language.id === episode.language_id
+                );
+
+                // Set the language name as the initial value of the language selector
+                setSelectedLanguage(
+                    selectedLanguageObject ? selectedLanguageObject.id : ""
+                );
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchLanguages();
+    }, [episode.language_id]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -203,14 +276,48 @@ function EditForm({ episode, onUpdate }) {
             download_link: downloadLink,
             article_heading: articleHeading,
             article_description: articleDescription,
+            meta_title: metaTitle,
+            meta_description: metaDesc,
+            language_id: selectedLanguage,
         };
 
         onUpdate(updatedEpisode);
     };
 
     return (
-        <div className={`${styles['updateform-container']}`}>
+        <div className={`${styles["updateform-container"]}`}>
             <form onSubmit={handleSubmit}>
+                <label>
+                    Meta Title:
+                    <input
+                        type="text"
+                        required
+                        value={metaTitle}
+                        onChange={(e) => setMetaTitle(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Meta Description:
+                    <textarea
+                        value={metaDesc}
+                        required
+                        onChange={(e) => setMetaDesc(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Language:
+                    <select
+                        value={selectedLanguage}
+                        onChange={(e) => setSelectedLanguage(e.target.value)}
+                        required
+                    >
+                        {languages.map((language) => (
+                            <option key={language.id} value={language.id}>
+                                {language.name}
+                            </option>
+                        ))}
+                    </select>
+                </label>
                 <label>
                     Season No:
                     <input
