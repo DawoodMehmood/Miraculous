@@ -7,7 +7,7 @@ const Navbar = () => {
     useEffect(() => {
         if (window.scrollY > 0) {
             window.scrollTo(0, 0); // Scroll to the top when the location changes and scroll position is not already at the top
-          }
+        }
         // Scroll to the top when the location changes
         window.scrollTo(0, 0);
     }, [location]);
@@ -35,7 +35,10 @@ const Navbar = () => {
                 </li>
                 <li
                     className={
-                        location.pathname === "/play" ? "active play" : ""
+                        location.pathname === "/play" ||
+                        location.pathname.startsWith("/watch/")
+                            ? "active play"
+                            : ""
                     }
                 >
                     <Link to="/play">

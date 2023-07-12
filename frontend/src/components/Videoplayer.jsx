@@ -140,14 +140,14 @@ const VideoPlayer = ({ poster, videoUrl, downloadUrl }) => {
                 muted={muted}
                 volume={volume}
                 playbackRate={speed}
-                controls={false}
+                controls={true}
                 light={poster}
                 width="100%"
                 height="100%"
                 onProgress={handleProgress}
                 className={styles["react-player"]}
             />
-            {showControls && (
+            {/* {showControls && (
                 <div className={styles["video-player-controls"]}>
                     <button onClick={handlePlayPause}>
                         {playing ? <FaPause /> : <FaPlay />}
@@ -220,7 +220,6 @@ const VideoPlayer = ({ poster, videoUrl, downloadUrl }) => {
                         onChange={handleLanguageChange}
                     >
                         <option value="">Select Language</option>
-                        {/* Add options for available audio languages */}
                     </select>
                     <button onClick={handleDownload}>
                         <FaDownload />
@@ -229,7 +228,7 @@ const VideoPlayer = ({ poster, videoUrl, downloadUrl }) => {
                         {isFullScreen ? <FaCompress /> : <FaExpand />}
                     </button>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

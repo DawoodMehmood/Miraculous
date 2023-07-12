@@ -3,13 +3,14 @@ import VideoPlayer from "../components/Videoplayer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import BASE_URL from '../../config';
-
+import { FaArrowLeft, FaDownload } from "react-icons/fa";
+import BASE_URL from "../../config";
 
 function Player() {
     const { id } = useParams();
     const [video, setVideoData] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         const fetchVideoData = async () => {
@@ -23,15 +24,43 @@ function Player() {
             }
         };
 
+        // Update the meta tags
+        document.title = video.meta_title;
+        const meta_titleTag = document.querySelector('meta[name="title"]');
+        if (meta_titleTag) {
+          meta_titleTag.setAttribute('content', video.meta_title);
+        }
+
+        const metaDescriptionTag = document.querySelector('meta[name="description"]');
+            if (metaDescriptionTag) {
+              metaDescriptionTag.setAttribute('content', video.meta_description);
+            }
+
+        const fetchLanguages = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/api/languages`);
+                setLanguages(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const fetchVideos = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/api/videos`);
+                setVideos(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
         fetchVideoData();
-    }, [id]);
+        fetchLanguages();
+        fetchVideos();
+    }, [id, video.meta_title, video.meta_description]);
 
     const goBack = () => {
         window.history.back();
-    };
-
-    const handlemenu = () => {
-        document.getElementById("item").style.display = "none";
     };
 
     const toggleVisibility = () => {
@@ -39,6 +68,26 @@ function Player() {
             document.getElementById("item").style.display === "block"
                 ? "none"
                 : "block";
+    };
+
+    const handleLanguageChange = (selectedLanguageId) => {
+        document.getElementById("item").style.display = "none";
+        // Find the video object with the matching selectedLanguageId, season_no, episode_no, and episode_type
+        const selectedVideo = videos.find(
+            (v) =>
+                v.language_id === selectedLanguageId &&
+                v.season_no === video.season_no &&
+                v.episode_no === video.episode_no &&
+                v.episode_type === video.episode_type
+        );
+
+        if (selectedVideo) {
+            window.location.href = `http://localhost:3000/watch/${selectedVideo.id}`;
+        }
+    };
+
+    const handleDownload = () => {
+        window.open(video.download_link, "_blank");
     };
 
     return (
@@ -58,28 +107,22 @@ function Player() {
                         </button>
                         <ul className={`${styles.langchooser}`} id="item">
                             <div>
-                                <li
-                                    className={`${styles.langitem}`}
-                                    onClick={handlemenu}
-                                >
-                                    <img
-                                        src="https://miraculous.to/flags/flag-en.jpg"
-                                        alt="flag"
-                                        className={`${styles.menuflag}`}
-                                    />
-                                    <div>English</div>
-                                </li>
-                                <li
-                                    className={`${styles.langitem}`}
-                                    onClick={handlemenu}
-                                >
-                                    <img
-                                        src="https://miraculous.to/flags/flag-en.jpg"
-                                        alt="flag"
-                                        className={`${styles.menuflag}`}
-                                    />
-                                    <div>Espanol Europeo</div>
-                                </li>
+                                {languages.map((language) => (
+                                    <li
+                                        key={language.id}
+                                        className={`${styles.langitem}`}
+                                        onClick={() =>
+                                            handleLanguageChange(language.id)
+                                        }
+                                    >
+                                        <img
+                                            src={language.flagUrl}
+                                            alt="flag"
+                                            className={`${styles.menuflag}`}
+                                        />
+                                        <div>{language.name}</div>
+                                    </li>
+                                ))}
                             </div>
                         </ul>
                     </div>
@@ -109,7 +152,12 @@ function Player() {
                 <br />
                 <br />
                 <div className={`${styles.videoinfocontainer}`}>
-                    <div className={`${styles.videoplayer}`} itemProp="video" itemScope="" itemType="http://schema.org/VideoObject">
+                    <div
+                        className={`${styles.videoplayer}`}
+                        itemProp="video"
+                        itemScope=""
+                        itemType="http://schema.org/VideoObject"
+                    >
                         <VideoPlayer
                             poster={video.thumbnail_image_link}
                             videoUrl={video.video_url}
@@ -124,6 +172,13 @@ function Player() {
                         >
                             <FaArrowLeft />
                             &nbsp;Go Back to list of Episodes
+                        </button>
+                        <button
+                            onClick={handleDownload}
+                            className={`${styles.backbutton} text-white font-bold py-2 px-3`}
+                        >
+                            Download &nbsp;
+                            <FaDownload />
                         </button>
                     </div>
                 </div>

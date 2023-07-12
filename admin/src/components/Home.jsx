@@ -16,7 +16,9 @@ function Home() {
     useEffect(() => {
         const fetchLanguageNames = async (episodes) => {
             try {
-                const languageIds = episodes.map((episode) => episode.language_id);
+                const languageIds = episodes.map(
+                    (episode) => episode.language_id
+                );
                 const uniqueLanguageIds = [...new Set(languageIds)];
 
                 const languageNamesData = await Promise.all(
@@ -37,7 +39,9 @@ function Home() {
 
         const fetchLanguageName = async (id) => {
             try {
-                const response = await axios.get(`${BASE_URL}/api/languages/${id}`);
+                const response = await axios.get(
+                    `${BASE_URL}/api/languages/${id}`
+                );
                 return response.data.name;
             } catch (error) {
                 console.error(error);
@@ -60,7 +64,6 @@ function Home() {
 
         fetchData();
     }, []);
-
 
     const handleEdit = (episode) => {
         setEditingEpisode(episode);

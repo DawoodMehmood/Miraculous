@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import BASE_URL from '../../config';
+import BASE_URL from "../../config";
 
 function Languages() {
     const [name, setName] = useState("");
@@ -154,9 +154,12 @@ function Languages() {
                 <div className={styles.cardContainer}>
                     {languages.map((language) => (
                         <div className={styles.card} key={language.id}>
-                            {editingLanguage && editingLanguage.id === language.id ? (
+                            {editingLanguage &&
+                            editingLanguage.id === language.id ? (
                                 <div>
-                                    <h3 className={styles.heading}>Edit Language</h3>
+                                    <h3 className={styles.heading}>
+                                        Edit Language
+                                    </h3>
                                     <EditForm
                                         language={editingLanguage}
                                         onUpdate={handleUpdate}
@@ -171,19 +174,30 @@ function Languages() {
                                         >
                                             <FaEdit />
                                         </button>
-                                        <button
-                                            className={styles.deleteButton}
-                                            onClick={() =>
-                                                handleConfirmDelete(language.id)
-                                            }
-                                        >
-                                            <FaTrash />
-                                        </button>
+                                        {language.id !== 1 && (
+                                            <button
+                                                className={styles.deleteButton}
+                                                onClick={() =>
+                                                    handleConfirmDelete(
+                                                        language.id
+                                                    )
+                                                }
+                                            >
+                                                <FaTrash />
+                                            </button>
+                                        )}
                                     </div>
-                                    <img src={language.flagUrl} alt={language.name} />
-                                    <span>
-                                        <strong>Name:</strong> {language.name}
-                                    </span>
+                                    <div className={styles.languageContainer}>
+                                        <img
+                                            src={language.flagUrl}
+                                            alt={language.name}
+                                            className={styles.flagImage}
+                                        />
+                                        <span>
+                                            <strong>Name:</strong>{" "}
+                                            {language.name}
+                                        </span>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -211,7 +225,7 @@ function EditForm({ language, onUpdate }) {
     };
 
     return (
-        <div className={`${styles['updateform-container']}`}>
+        <div className={`${styles["updateform-container"]}`}>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:

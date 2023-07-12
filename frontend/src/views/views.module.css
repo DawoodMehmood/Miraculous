@@ -342,11 +342,12 @@ ul {
 .langselector {
     display: block;
     position: relative;
+    z-index:100;
 }
 
 .langchooser {
     position: absolute;
-    right: 0px;
+    right: 10px;
     top: 55px;
     display: none;
     list-style: none;
@@ -376,7 +377,7 @@ ul {
 }
 
 .langitem:hover {
-    background-color: #f01010;
+    background-color: #e5e5e5;
 }
 
 .menuflag {
@@ -468,7 +469,7 @@ ul {
 
 .backbutton {
     background-color: transparent;
-    border: 3px solid #004477;
+    border: 3px solid #0161ab;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 5px;
     font-weight: 800;
@@ -490,8 +491,10 @@ ul {
 }
 
 .buttoncontainer{
+    display: flex;
+    justify-content: center;
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 100px;
+    align-items: center;
+    gap: 50px;
+    margin-top: 3rem;
 }
