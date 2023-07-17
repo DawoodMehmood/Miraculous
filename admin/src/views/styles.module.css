@@ -17,6 +17,10 @@
     bottom: 0;
   }
 
+  .sidebar-content {
+    margin-top: 50px;
+  }
+
   .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -28,7 +32,7 @@
 
   .sidebar li {
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
     font-weight: 700;
   }
@@ -63,6 +67,3 @@
     margin-top: 80px;
     background-color: #f8faf8;
   }
-
-
-

@@ -1,73 +1,67 @@
 import styles from "./views.module.css";
 import Header from "../components/Header";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import BASE_URL from '../../config';
+import axios from "axios";
+import BASE_URLS from "../../config";
+const BASE_URL = BASE_URLS.BASE_URL;
 
 function Home() {
     const [videos, setVideos] = useState([]);
-    const [teleURL, setTeleURL] = useState('');
+    const [teleURL, setTeleURL] = useState("");
+    const [twitchURL, setTwitchURL] = useState("");
 
     useEffect(() => {
         const fetchMetaTags = async () => {
             try {
-              const response = await axios.get(`${BASE_URL}/api/meta`);
-              const { metaTitle, metaDesc, favicon } = response.data;
+                const response = await axios.get(`${BASE_URL}/api/meta`);
+                const { metaTitle, metaDesc, twitchLink, teleLink } =
+                    response.data;
 
-              // Update the document's title
-              if(metaTitle){
-                  document.title = metaTitle;
-              }
+                // Update the document's title
+                if (metaTitle) {
+                    document.title = metaTitle;
+                }
 
-              // Update the meta tags
-              const meta_titleTag = document.querySelector('meta[name="title"]');
-              if (meta_titleTag) {
-                meta_titleTag.setAttribute('content', metaTitle);
-              }
+                // Update the meta tags
+                const meta_titleTag =
+                    document.querySelector('meta[name="title"]');
+                if (meta_titleTag) {
+                    meta_titleTag.setAttribute("content", metaTitle);
+                }
 
-              const metaDescriptionTag = document.querySelector('meta[name="description"]');
-              if (metaDescriptionTag) {
-                metaDescriptionTag.setAttribute('content', metaDesc);
-              }
+                const metaDescriptionTag = document.querySelector(
+                    'meta[name="description"]'
+                );
+                if (metaDescriptionTag) {
+                    metaDescriptionTag.setAttribute("content", metaDesc);
+                }
 
-              // Update the favicon
-              const faviconTag = document.querySelector('link[rel="shortcut icon"]');
-              if (faviconTag) {
-                faviconTag.setAttribute('href', favicon);
-              }
+                setTeleURL(teleLink);
+                setTwitchURL(twitchLink);
             } catch (error) {
-              console.error('Error fetching meta tags:', error);
+                console.error("Error fetching meta tags:", error);
             }
-          };
+        };
 
-          fetchMetaTags();
+        fetchMetaTags();
 
         // Fetch data from the Laravel API
         const fetchData = async () => {
-          try {
-            const response = await axios.get(`${BASE_URL}/api/videos`);
-            setVideos(response.data);
-          } catch (error) {
-            console.error(error);
-          }
+            try {
+                const response = await axios.get(`${BASE_URL}/api/videos`);
+                setVideos(response.data);
+            } catch (error) {
+                console.error(error);
+            }
         };
 
         fetchData();
 
-        // Fetch teleURL from the Laravel API
-        const fetchTeleURL = async () => {
-            try {
-              const response = await axios.get(`${BASE_URL}/api/meta`);
-              setTeleURL(response.data.link);
-            } catch (error) {
-              console.error(error);
-            }
-          };
-
-          fetchTeleURL();
-      }, []);
-      const filteredVideos = videos.filter(video => video.episode_type === 'home' && video.language_id == '1');
+    }, []);
+    const filteredVideos = videos.filter(
+        (video) => video.episode_type === "home" && video.language_id == "1"
+    );
 
     return (
         <div>
@@ -77,54 +71,63 @@ function Home() {
                 <div className={`${styles["container"]}`}>
                     <div className={`${styles["home-content"]}`}>
                         <div className={`${styles["col-md-6"]}`}>
-                            <div className={`${styles["home-heading"]}`}>
-                                New Episodes
-                            </div>
-                            {filteredVideos && filteredVideos.map((video) => (
-                                <Link
-                                to={`/watch/${video.id}`}
-                                key={video.id}
-                            >
-                                <div
-                                    className={`${styles.card}`}
-                                >
-                                    <img
-                                        src={video.thumbnail_image_link}
-                                        alt="Episode img"
-                                        className={`${styles["card-image"]}`}
-                                    />
-                                    <div
-                                        className={`${styles["card-content"]}`}
-                                    >
-                                        <h3
-                                            className={`${styles["card-title"]}`}
-                                        >
-                                            {video.episode_title}
-                                        </h3>
-                                    </div>
+                            {filteredVideos && (
+                                <div className={`${styles["home-heading"]}`}>
+                                    New Episodes
                                 </div>
-                            </Link>
-                            ))}
+                            )}
+                            {filteredVideos &&
+                                filteredVideos.map((video) => (
+                                    <div key={video.id}>
+                                        <Link to={`/watch/${video.id}`}>
+                                            <div className={`${styles.card}`}>
+                                                <img
+                                                    src={
+                                                        video.thumbnail_image_link
+                                                    }
+                                                    alt="Episode img"
+                                                    className={`${styles["card-image"]}`}
+                                                />
+                                                <div
+                                                    className={`${styles["card-content"]}`}
+                                                >
+                                                    <h3
+                                                        className={`${styles["card-title"]}`}
+                                                    >
+                                                        {video.episode_title}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ))}
                         </div>
                     </div>
                     <div className={`${styles["home-flex-content"]}`}>
                         <div className={`${styles["twitchbox"]}`}>
-                            <div className={`${styles["home-livestream"]}`}>
-                                <h2>Livestream:</h2>
-                            </div>
-                            <div className={`${styles["twich"]}`}>
-                                <div className={`${styles["twitch-video"]}`}>
-                                    <iframe
-                                        src="https://player.twitch.tv/?channel=mymiraculousto&parent=hub.miraculous.to&parent=www.hub.miraculous.to&autoplay=true"
-                                        height="100%"
-                                        width="100%"
-                                        frameBorder="0"
-                                        scrolling="no"
-                                        allowFullScreen="true"
-                                        title="Miraculous Live"
-                                    ></iframe>
+                            {twitchURL && (
+                                <div>
+                                    <div
+                                        className={`${styles["home-livestream"]}`}
+                                    >
+                                        <h2>Livestream:</h2>
+                                    </div>
+                                    <div className={`${styles["twitch"]}`}>
+                                        <div
+                                            className={`${styles["twitch-video"]}`}
+                                        >
+                                            <iframe
+                                                src={twitchURL}
+                                                height="100%"
+                                                width="100%"
+                                                allowFullScreen
+                                                title="Miraculous Live"
+                                            ></iframe>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
+
                             <a
                                 className={`${styles["card"]}`}
                                 href={teleURL}
@@ -132,7 +135,7 @@ function Home() {
                                 rel="noreferrer noopener"
                             >
                                 <img
-                                    src="https://hub.miraculous.to/thumbs/Miraculous/live.jpg"
+                                    src="../../telelinkimg.jpg"
                                     alt="Card Background"
                                     className={`${styles["card-image"]}`}
                                 />

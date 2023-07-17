@@ -6,7 +6,9 @@ import Specials from "../components/Specials";
 import Episodes from "../components/Episodes";
 import GeneralMeta from "../components/GeneralMeta";
 import Languages from "../components/Languages";
+import Register from "../components/Register";
 import styles from "./styles.module.css";
+
 function Admin() {
     const [activeComponent, setActiveComponent] = useState("createVideo");
 
@@ -24,6 +26,8 @@ function Admin() {
                 return <GeneralMeta />;
             case "languages":
                 return <Languages />;
+            case "register":
+                return <Register />;
             default:
                 return <CreateVideo />;
         }
@@ -32,7 +36,18 @@ function Admin() {
     return (
         <div className={`${styles["admin-page"]}`}>
             <div className={`${styles["sidebar"]}`}>
+                <div className={`${styles["sidebar-content"]}`}>
                 <ul>
+                    <li
+                        className={
+                            activeComponent === "register"
+                                ? `${styles.active}`
+                                : ""
+                        }
+                        onClick={() => setActiveComponent("register")}
+                    >
+                        Manage Admins
+                    </li>
                     <li
                         className={
                             activeComponent === "metaTags"
@@ -100,6 +115,7 @@ function Admin() {
                         Episodes
                     </li>
                 </ul>
+                </div>
             </div>
             <div className={styles["content"]}>{renderComponent()}</div>
         </div>

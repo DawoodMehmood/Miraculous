@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../axios";
 import styles from "./components.module.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import BASE_URL from "../../config";
 
 function Languages() {
     const [name, setName] = useState("");
@@ -21,7 +20,7 @@ function Languages() {
 
     const fetchLanguages = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}/api/languages`);
+            const response = await axios.get(`/languages`);
             setLanguages(response.data);
         } catch (error) {
             console.error("Error fetching languages:", error);
@@ -35,7 +34,7 @@ function Languages() {
     const handleUpdate = async (updatedLanguage) => {
         try {
             const response = await axios.put(
-                `${BASE_URL}/api/languages/${updatedLanguage.id}`,
+                `/languages/${updatedLanguage.id}`,
                 updatedLanguage
             );
             toast.success("Language Updated successfully", {
@@ -54,7 +53,7 @@ function Languages() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${BASE_URL}/api/languages/${id}`);
+            await axios.delete(`/languages/${id}`);
             setLanguages((prevLanguages) =>
                 prevLanguages.filter((language) => language.id !== id)
             );
@@ -98,11 +97,7 @@ function Languages() {
 
         try {
             // Send a POST request to the backend API to create the language
-            const response = await axios.post(
-                `${BASE_URL}/api/languages`,
-                language
-            );
-            console.log("Language created successfully:", response.data);
+            const response = await axios.post(`/languages`, language);
             // Display flash message using react-toastify
             toast.success("Language created successfully", {
                 position: toast.POSITION.TOP_CENTER,
@@ -168,23 +163,31 @@ function Languages() {
                             ) : (
                                 <div>
                                     <div className={styles.cardButtons}>
-                                        <button
-                                            className={styles.editButton}
-                                            onClick={() => handleEdit(language)}
-                                        >
-                                            <FaEdit />
-                                        </button>
                                         {language.id !== 1 && (
-                                            <button
-                                                className={styles.deleteButton}
-                                                onClick={() =>
-                                                    handleConfirmDelete(
-                                                        language.id
-                                                    )
-                                                }
-                                            >
-                                                <FaTrash />
-                                            </button>
+                                            <div>
+                                                <button
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                    onClick={() =>
+                                                        handleEdit(language)
+                                                    }
+                                                >
+                                                    <FaEdit />
+                                                </button>
+                                                <button
+                                                    className={
+                                                        styles.deleteButton
+                                                    }
+                                                    onClick={() =>
+                                                        handleConfirmDelete(
+                                                            language.id
+                                                        )
+                                                    }
+                                                >
+                                                    <FaTrash />
+                                                </button>
+                                            </div>
                                         )}
                                     </div>
                                     <div className={styles.languageContainer}>

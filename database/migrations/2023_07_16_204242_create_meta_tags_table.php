@@ -12,8 +12,8 @@ class CreateMetaTagsTable extends Migration
             $table->id();
             $table->string('metaTitle');
             $table->text('metaDesc');
-            $table->string('favicon')->nullable();
-            $table->string('link');
+            $table->string('twitchLink');
+            $table->string('teleLink');
             $table->timestamps();
         });
     }

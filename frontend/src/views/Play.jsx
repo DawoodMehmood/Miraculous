@@ -3,8 +3,8 @@ import styles from "./views.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import BASE_URL from '../../config';
-
+import BASE_URLS from '../../config';
+const BASE_URL = BASE_URLS.BASE_URL;
 
 function Play() {
     const [videos, setVideos] = useState([]);
@@ -13,7 +13,7 @@ function Play() {
         const fetchMetaTags = async () => {
             try {
               const response = await axios.get(`${BASE_URL}/api/meta`);
-              const { metaTitle, metaDesc, favicon } = response.data;
+              const { metaTitle, metaDesc } = response.data;
 
               // Update the document's title
               if(metaTitle){
@@ -31,11 +31,6 @@ function Play() {
                 metaDescriptionTag.setAttribute('content', metaDesc);
               }
 
-              // Update the favicon
-              const faviconTag = document.querySelector('link[rel="shortcut icon"]');
-              if (faviconTag) {
-                faviconTag.setAttribute('href', favicon);
-              }
             } catch (error) {
               console.error('Error fetching meta tags:', error);
             }

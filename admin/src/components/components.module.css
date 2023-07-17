@@ -2,13 +2,30 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* Adjust this to your desired alignment */
     height: 80px;
     background-color: rgb(102, 194, 254);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
+  }
+
+  .error {
+    font-size: 12px;
+    color: red;
+  }
+
+  .logout {
+    margin-right: 20px;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+  }
+
+  .logo {
+    height: 50px;
+    margin-left: 20px;
   }
 
   .flagImage {

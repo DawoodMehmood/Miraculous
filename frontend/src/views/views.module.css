@@ -4,7 +4,6 @@
 
 .news {
     background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
-    background-color: red;
 }
 
 .play {
@@ -80,11 +79,16 @@
     font-weight: 700;
 }
 
-
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 400px) {
     .col-md-6 {
         flex: 0 0 auto;
         width: 75%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .home-heading {
+        text-align: center;
     }
 }
 
@@ -96,10 +100,11 @@
 }
 
 .twitchbox {
-    width: 50%;
-    margin-right: 30px;
+    width: 55%;
+    margin: 0 auto;
     margin-bottom: 30px;
 }
+
 
 .home-flex-content {
     display: flex;
@@ -128,11 +133,21 @@
 .specials-grid {
     width: 100%;
     display: flex;
-    gap: 30px;
+    gap: 25px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
     padding-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .specials-grid {
+        justify-content: center;
+        padding-left: 0;
+    }
+    .specials-content {
+        padding: 25px 20px;
+    }
 }
 
 
@@ -147,9 +162,9 @@
 
 .special-card {
     margin: 15px 0;
-    box-shadow: 0 0 20px 0 #000;
+    box-shadow: 0 0 20px 0 #3b3b3b;
     border-radius: 15px;
-    width: 300px;
+    /* width: 300px; */
 }
 
 .special-card-metadata {
@@ -177,7 +192,7 @@
 }
 
 .special-thumbnail {
-    width: 300px;
+    /* width: 300px; */
     height: 170px;
     position: relative;
     margin: 0;
@@ -279,6 +294,12 @@ ul {
     display: block;
 }
 
+@media only screen and (max-width: 400px) {
+    .card {
+        height: 120px;
+    }
+}
+
 .card:hover {
     transform: scale(1.04);
     border: none;
@@ -287,7 +308,7 @@ ul {
 .card-image {
     width: 100%;
     height: 100%;
-    object-fit:fill;
+    object-fit:cover;
     border-radius: 15px;
     position: relative;
 }
@@ -305,11 +326,8 @@ ul {
     font-weight: 900;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     display: flex;
-    /* Use flexbox for centering */
     align-items: center;
-    /* Vertically center the content */
     justify-content: center;
-    /* Horizontally center the content */
 }
 
 .card-title {
@@ -319,6 +337,32 @@ ul {
 .card-tele {
     font-size: 24px;
 }
+
+@media only screen and (max-width: 500px) {
+    .card-title {
+        font-size: 30px;
+    }
+
+    .card-tele {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+
+    .card-tele {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .card-tele {
+        font-size: 16px;
+    }
+}
+
+
 
 /* Watch panel */
 
@@ -402,12 +446,13 @@ ul {
 }
 
 .videoepisodetitle {
-    font-size: 36px !important;
+    font-size: 34px !important;
     font-weight: 900;
     text-transform: uppercase;
     white-space: nowrap;
     text-shadow: 0 4px 9px rgb(6 53 48 / 25%);
 }
+
 
 .videoshowtitle {
     font-weight: 400;
@@ -417,34 +462,14 @@ ul {
 
 .videoinfocontainer {
     width: 100%;
-    margin-left: 120px;
+    margin: 0 auto;
     max-width: 1140px;
-    /* font-weight: 500; */
 }
 
-/* @media (min-width: 1200px) {
-    .videoinfocontainer {
-        max-width: 1140px;
-    }
+.article {
+    margin-top: 50px;
 }
 
-@media (min-width: 992px) {
-    .videoinfocontainer {
-        max-width: 960px;
-    }
-}
-
-@media (min-width: 768px) {
-    .videoinfocontainer {
-        max-width: 720px;
-    }
-}
-
-@media (min-width: 576px) {
-    .videoinfocontainer {
-        max-width: 540px;
-    }
-} */
 
 .videoarea {
     width: -webkit-fill-available;
@@ -464,7 +489,6 @@ ul {
     padding-top: 0 !important;
     max-width: 100%;
     height: 100vh;
-    /* border: 1px solid grey; */
 }
 
 .backbutton {
@@ -495,6 +519,153 @@ ul {
     justify-content: center;
     width: 100%;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
     margin-top: 3rem;
+}
+
+
+@media (max-width: 1200px) {
+    .videoinfocontainer {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 1140px) {
+    .videoinfocontainer {
+        max-width: 940px;
+    }
+
+    .twitch-video {
+        height: 500px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .videoinfocontainer {
+        max-width: 800px;
+    }
+
+    .twitch-video {
+        height: 400px;
+    }
+}
+
+@media (max-width: 950px) {
+    .videoinfocontainer {
+        max-width: 750px;
+    }
+}
+
+@media (max-width: 850px) {
+    .videoinfocontainer {
+        max-width: 650px;
+    }
+}
+
+@media (max-width: 750px) {
+    .videoinfocontainer {
+        max-width: 550px;
+    }
+}
+
+@media (max-width: 650px) {
+    .videoinfocontainer {
+        max-width: 450px;
+    }
+    .backbutton {
+        font-size: 12px;
+    }
+
+    .twitch-video {
+        height: 300px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .videoepisodetitle {
+        font-size: 28px !important;
+    }
+
+    .videometainfo {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 550px) {
+    .videoinfocontainer {
+        max-width: 350px;
+    }
+
+    .videoepisodetitle {
+        font-size: 26px !important;
+    }
+
+    .videoshowtitle {
+        font-size: 1.15rem !important;
+    }
+
+    .twitchbox {
+        width: 60%;
+    }
+}
+
+@media (max-width: 450px) {
+    .videoinfocontainer {
+        max-width: 350px;
+    }
+
+    .article {
+        margin-top: 35px;
+    }
+
+    .twitchbox {
+        width: 70%;
+    }
+}
+
+@media (max-width: 400px) {
+    .videoinfocontainer {
+        max-width: 320px;
+    }
+
+    .buttoncontainer{
+        gap: 30px;
+        margin-top: 2rem;
+    }
+
+    .videoepisodetitle {
+        font-size: 24px !important;
+    }
+
+    .videometainfo {
+        font-size: 0.9rem !important;
+    }
+
+    .videoshowtitle {
+        font-size: 1rem !important;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .videoinfocontainer {
+        max-width: 250px;
+    }
+
+    .buttoncontainer{
+        gap: 10px;
+    }
+
+    .videometainfo {
+        font-size: 0.75rem !important;
+    }
+
+    .videoepisodetitle {
+        font-size: 20px !important;
+    }
+
+    .videoshowtitle {
+        font-size: 0.8rem !important;
+    }
 }

@@ -23,6 +23,15 @@ class User extends Authenticatable
         'password',
     ];
 
+    public static function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ];
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

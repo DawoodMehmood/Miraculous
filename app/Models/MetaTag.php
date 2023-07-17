@@ -12,7 +12,7 @@ class MetaTag extends Model
     protected $fillable = [
         'metaTitle',
         'metaDesc',
-        'favicon',
-        'link',
+        'twitchLink',
+        'teleLink',
     ];
 }

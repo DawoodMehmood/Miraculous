@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import styles from "./components.module.css";
-import BASE_URL from "../../config";
 
 function Episodes() {
     const [episodes, setEpisodes] = useState([]);
@@ -40,7 +39,7 @@ function Episodes() {
         const fetchLanguageName = async (id) => {
             try {
                 const response = await axios.get(
-                    `${BASE_URL}/api/languages/${id}`
+                    `/languages/${id}`
                 );
                 return response.data.name;
             } catch (error) {
@@ -51,7 +50,7 @@ function Episodes() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/api/videos`);
+                const response = await axios.get(`/videos`);
                 const filteredEpisodes = response.data.filter(
                     (video) => video.episode_type === "episodes"
                 );
@@ -72,7 +71,7 @@ function Episodes() {
     const handleUpdate = async (updatedEpisode) => {
         try {
             const response = await axios.put(
-                `${BASE_URL}/api/videos/${updatedEpisode.id}`,
+                `/videos/${updatedEpisode.id}`,
                 updatedEpisode
             );
             toast.success("Episode Updated successfully", {
@@ -91,7 +90,7 @@ function Episodes() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${BASE_URL}/api/videos/${id}`);
+            await axios.delete(`/videos/${id}`);
             setEpisodes((prevEpisodes) =>
                 prevEpisodes.filter((episode) => episode.id !== id)
             );
@@ -244,7 +243,7 @@ function EditForm({ episode, onUpdate }) {
     useEffect(() => {
         const fetchLanguages = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/api/languages`);
+                const response = await axios.get(`/languages`);
                 setLanguages(response.data);
 
                 // Find the language object with the matching language_id

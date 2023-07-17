@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft, FaDownload } from "react-icons/fa";
-import BASE_URL from "../../config";
+import BASE_URLS from "../../config";
+const BASE_URL = BASE_URLS.BASE_URL;
+const APP_URL = BASE_URLS.APP_URL;
 
 function Player() {
     const { id } = useParams();
@@ -82,7 +84,7 @@ function Player() {
         );
 
         if (selectedVideo) {
-            window.location.href = `http://localhost:3000/watch/${selectedVideo.id}`;
+            window.location.href = `${APP_URL}/watch/${selectedVideo.id}`;
         }
     };
 
@@ -91,7 +93,7 @@ function Player() {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={`${styles.player} ${styles["full-height"]}`}>
                 <div className={`${styles.flag}`}>
                     <div className={`${styles.langselector}`}>
@@ -171,7 +173,7 @@ function Player() {
                             onClick={goBack}
                         >
                             <FaArrowLeft />
-                            &nbsp;Go Back to list of Episodes
+                            &nbsp;Go Back
                         </button>
                         <button
                             onClick={handleDownload}
@@ -183,7 +185,7 @@ function Player() {
                     </div>
                 </div>
                 <div className={`${styles.videoinfocontainer} text-white`}>
-                    <div>
+                    <div className={`${styles.article}`}>
                         <h2>{video.article_heading}</h2>
                         <p>{video.article_description}</p>
                     </div>

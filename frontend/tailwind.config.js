@@ -1,11 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-/* eslint-disable no-undef */
-module.exports = {
-    content: [
-      "./src/**/*.{js,jsx,ts,tsx}",
-    ],
+export default {
+    purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+    content: [],
     theme: {
-      extend: {},
+        extend: {},
     },
     plugins: [],
-  }
+};

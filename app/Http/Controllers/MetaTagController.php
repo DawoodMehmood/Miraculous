@@ -18,8 +18,8 @@ class MetaTagController extends Controller
         $validatedData = $request->validate([
             'metaTitle' => 'required',
             'metaDesc' => 'required',
-            'favicon' => 'nullable|url',
-            'link' => 'url',
+            'twitchLink' => 'url',
+            'teleLink' => 'url',
         ]);
 
         $metaTags = MetaTag::first();

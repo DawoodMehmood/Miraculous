@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../axios";
 import styles from "./components.module.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BASE_URL from "../../config";
 
 function CreateVideo() {
     const [seasonNo, setSeasonNo] = useState("");
@@ -25,7 +24,7 @@ function CreateVideo() {
     useEffect(() => {
         const fetchLanguages = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/api/languages`);
+                const response = await axios.get(`/languages`);
                 setLanguages(response.data);
             } catch (error) {
                 console.error("Error fetching languages:", error);
@@ -61,10 +60,9 @@ function CreateVideo() {
         try {
             // Send a POST request to the backend API to create the video
             const response = await axios.post(
-                `${BASE_URL}/api/videos`,
+                `/videos`,
                 newVideo
             );
-            console.log("Video created successfully:", response.data);
             // Display flash message using react-toastify
             toast.success("New episode created successfully", {
                 position: toast.POSITION.TOP_CENTER,

@@ -1,30 +1,28 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Admin from './views/Admin';
-import Header from './components/Header';
-const App = () => {
+import { BrowserRouter as Router, Route, Navigate } from "react-router-dom";
+import Login from "./views/Login";
+import Admin from "./views/Admin";
+import ProtectedLayout from "./components/ProtectedLayout";
+import GuestLayout from "./components/GuestLayout";
+import { Routes } from "react-router-dom/dist";
+import Header from "./components/Header";
 
+function App() {
     return (
-
-      <div className="App">
-        <Header />
-          <BrowserRouter>
-          <div className="pages">
+        <Router>
             <Routes>
-            <Route
-                path="/"
-                element={<Navigate to="/admin" />}
-              />
-              <Route
-                path="/admin"
-                element={<Admin />}
-              />
+                <Route path="/" exact element={<GuestLayout />}>
+                <Route path="/" element={<Navigate to="/login" replace />} />
+                    <Route path="/login" element={<Login />} />
+                </Route>
+                <Route path="/" element={<ProtectedLayout />}>
+                    <Route path="/admin" element={<>
+                                <Header />
+                                <Admin />
+                            </>} />
+                </Route>
             </Routes>
-          </div>
-        </BrowserRouter>
+        </Router>
+    );
+}
 
-      </div>
-
-    )
-  }
-
-  export default App;
+export default App;
