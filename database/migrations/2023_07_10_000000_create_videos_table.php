@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('article_description')->nullable();
             $table->string('meta_title');
             $table->text('meta_description');
+            $table->text('jsCode')->nullable();
             $table->timestamps();
         });
     }

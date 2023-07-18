@@ -23,7 +23,7 @@ class Video extends Model
         'article_description',
         'meta_title',
         'meta_description',
-
+        'jsCode',
     ];
 
     public static function rules()
@@ -42,6 +42,7 @@ class Video extends Model
             'article_description' => 'nullable|string',
             'meta_title' => 'required|string',
             'meta_description' => 'required|string',
+            'jsCode' => 'nullable|string',
         ];
     }
 

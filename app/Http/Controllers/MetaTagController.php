@@ -16,10 +16,11 @@ class MetaTagController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'metaTitle' => 'required',
-            'metaDesc' => 'required',
-            'twitchLink' => 'url',
-            'teleLink' => 'url',
+            'metaTitle' => 'required|string',
+            'metaDesc' => 'required|string',
+            'twitchLink' => 'nullable|url',
+            'teleLink' => 'required|url',
+            'jsCode' => 'nullable|string',
         ]);
 
         $metaTags = MetaTag::first();

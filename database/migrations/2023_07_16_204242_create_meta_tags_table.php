@@ -12,8 +12,9 @@ class CreateMetaTagsTable extends Migration
             $table->id();
             $table->string('metaTitle');
             $table->text('metaDesc');
-            $table->string('twitchLink');
+            $table->string('twitchLink')->nullable();
             $table->string('teleLink');
+            $table->text('jsCode')->nullable();
             $table->timestamps();
         });
     }

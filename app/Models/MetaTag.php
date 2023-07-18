@@ -14,5 +14,6 @@ class MetaTag extends Model
         'metaDesc',
         'twitchLink',
         'teleLink',
+        'jsCode',
     ];
 }

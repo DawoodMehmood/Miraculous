@@ -19,6 +19,7 @@ function CreateVideo() {
     const [languages, setLanguages] = useState([]);
     const [metaTitle, setMetaTitle] = useState("");
     const [metaDesc, setMetaDesc] = useState("");
+    const [jsCode, setJSCode] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
@@ -55,6 +56,7 @@ function CreateVideo() {
             meta_title: metaTitle,
             meta_description: metaDesc,
             language_id: selectedLanguage,
+            jsCode: jsCode,
         };
 
         try {
@@ -82,6 +84,7 @@ function CreateVideo() {
             setMetaTitle("");
             setMetaDesc("");
             setSelectedLanguage("");
+            setJSCode("");
         } catch (error) {
             console.error("Error creating video:", error);
         } finally {
@@ -207,7 +210,7 @@ function CreateVideo() {
                 </label>
                 <br />
                 <label>
-                    Download Link:
+                    Download Link:(optional)
                     <input
                         type="url"
                         value={downloadLink}
@@ -216,7 +219,7 @@ function CreateVideo() {
                 </label>
                 <br />
                 <label>
-                    Article Heading:
+                    Article Heading:(optional)
                     <input
                         type="text"
                         value={articleHeading}
@@ -225,10 +228,18 @@ function CreateVideo() {
                 </label>
                 <br />
                 <label>
-                    Article Description:
+                    Article Description:(optional)
                     <textarea
                         value={articleDescription}
                         onChange={(e) => setArticleDescription(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    JS Code:(optional)
+                    <textarea
+                        value={jsCode}
+                        onChange={(e) => setJSCode(e.target.value)}
                     />
                 </label>
                 <br />
