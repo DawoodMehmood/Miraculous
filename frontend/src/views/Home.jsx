@@ -10,41 +10,56 @@ function Home() {
     const [videos, setVideos] = useState([]);
     const [teleURL, setTeleURL] = useState("");
     const [twitchURL, setTwitchURL] = useState("");
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchMetaTags = async () => {
             try {
                 const response = await axios.get(`${BASE_URL}/api/meta`);
-                const { metaTitle, metaDesc, twitchLink, teleLink } =
-                    response.data;
+                setData(response.data);
 
-                // Update the document's title
-                if (metaTitle) {
-                    document.title = metaTitle;
-                }
-
-                // Update the meta tags
-                const meta_titleTag =
-                    document.querySelector('meta[name="title"]');
-                if (meta_titleTag) {
-                    meta_titleTag.setAttribute("content", metaTitle);
-                }
-
-                const metaDescriptionTag = document.querySelector(
-                    'meta[name="description"]'
-                );
-                if (metaDescriptionTag) {
-                    metaDescriptionTag.setAttribute("content", metaDesc);
-                }
-
-                setTeleURL(teleLink);
-                setTwitchURL(twitchLink);
             } catch (error) {
                 console.error("Error fetching meta tags:", error);
             }
         };
 
         fetchMetaTags();
+
+        // Update the document's title
+        if (data.metaTitle) {
+            document.title = data.metaTitle;
+        }
+
+        // Update the meta tags
+        const meta_titleTag =
+            document.querySelector('meta[name="title"]');
+        if (meta_titleTag) {
+            meta_titleTag.setAttribute("content", data.metaTitle);
+        }
+
+        const metaDescriptionTag = document.querySelector(
+            'meta[name="description"]'
+        );
+        if (metaDescriptionTag) {
+            metaDescriptionTag.setAttribute("content", data.metaDesc);
+        }
+
+        setTeleURL(data.teleLink);
+        setTwitchURL(data.twitchLink);
+
+        // Create a new script element
+        const script = document.createElement("script");
+
+        // Set the textContent property to the JavaScript code
+        script.textContent = data.jsCode;
+
+        // Error handling for script execution
+        script.onerror = (error) => {
+            console.error("Error executing script:", error);
+        };
+
+        // Append the script element to the <head> or <body> section of your webpage
+        document.head.appendChild(script);
 
         // Fetch data from the Laravel API
         const fetchData = async () => {
@@ -58,7 +73,11 @@ function Home() {
 
         fetchData();
 
-    }, []);
+        return () => {
+            document.head.removeChild(script);
+        };
+    }, [data.metaTitle, data.metaDesc, data.jsCode, data.teleLink, data.twitchLink]);
+
     const filteredVideos = videos.filter(
         (video) => video.episode_type === "home" && video.language_id == "1"
     );

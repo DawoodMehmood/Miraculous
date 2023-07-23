@@ -30,13 +30,31 @@ function Player() {
         document.title = video.meta_title;
         const meta_titleTag = document.querySelector('meta[name="title"]');
         if (meta_titleTag) {
-          meta_titleTag.setAttribute('content', video.meta_title);
+            meta_titleTag.setAttribute("content", video.meta_title);
         }
 
-        const metaDescriptionTag = document.querySelector('meta[name="description"]');
-            if (metaDescriptionTag) {
-              metaDescriptionTag.setAttribute('content', video.meta_description);
-            }
+        const metaDescriptionTag = document.querySelector(
+            'meta[name="description"]'
+        );
+        if (metaDescriptionTag) {
+            metaDescriptionTag.setAttribute("content", video.meta_description);
+        }
+
+        // if(video.jsCode){
+            // Create a new script element
+            const script = document.createElement("script");
+
+            // Set the textContent property to the JavaScript code
+            script.textContent = video.jsCode;
+
+            // Error handling for script execution
+            script.onerror = (error) => {
+                console.error("Error executing script:", error);
+            };
+
+            // Append the script element to the <head> or <body> section of your webpage
+            document.head.appendChild(script);
+        // }
 
         const fetchLanguages = async () => {
             try {
@@ -59,7 +77,12 @@ function Player() {
         fetchVideoData();
         fetchLanguages();
         fetchVideos();
-    }, [id, video.meta_title, video.meta_description]);
+
+        // Remove the script element after the component is unmounted
+        return () => {
+            document.head.removeChild(script);
+        };
+    }, [id, video.meta_title, video.meta_description, video.jsCode]);
 
     const goBack = () => {
         window.history.back();

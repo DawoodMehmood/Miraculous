@@ -9,6 +9,7 @@ function GeneralMeta() {
     const [metaDesc, setMetaDesc] = useState("");
     const [teleURL, setTeleURL] = useState("");
     const [twitchURL, setTwitchURL] = useState("");
+    const [jsCode, setJSCode] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -23,6 +24,7 @@ function GeneralMeta() {
             metaDesc: metaDesc,
             twitchLink: twitchURL,
             teleLink: teleURL,
+            jsCode: jsCode,
         };
 
         try {
@@ -41,6 +43,7 @@ function GeneralMeta() {
             setMetaDesc("");
             setTeleURL("");
             setTwitchURL("");
+            setJSCode("");
         } catch (error) {
             console.error("Error creating meta data:", error);
         } finally {
@@ -64,10 +67,9 @@ function GeneralMeta() {
                     />
                 </label>
                 <label>
-                    Twitch Embedding URL:
+                    Twitch Embedding URL: (optional)
                     <input
                         type="url"
-                        required
                         value={twitchURL}
                         onChange={(e) => setTwitchURL(e.target.value)}
                         placeholder="Hint: https://player.twitch.tv/?channel=mymiraculousto&parent=hub.miraculous.to&parent=www.hub.miraculous.to&autoplay=true"
@@ -88,6 +90,13 @@ function GeneralMeta() {
                         required
                         value={metaDesc}
                         onChange={(e) => setMetaDesc(e.target.value)}
+                    />
+                </label>
+                <label>
+                    JS Code: (optional)
+                    <textarea
+                        value={jsCode}
+                        onChange={(e) => setJSCode(e.target.value)}
                     />
                 </label>
                 <button type="submit" disabled={isSubmitting}>

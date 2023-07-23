@@ -205,6 +205,10 @@ function News() {
                                     <strong>Article Description:</strong>{" "}
                                     {episode.article_description}
                                 </p>
+                                <p>
+                                    <strong>JS Code:</strong>{" "}
+                                    {episode.jsCode}
+                                </p>
                             </div>
                         )}
                     </div>
@@ -239,6 +243,8 @@ function EditForm({ episode, onUpdate }) {
     const [articleDescription, setArticleDescription] = useState(
         episode.article_description
     );
+    const [jsCode, setJSCode] = useState(episode.jsCode);
+
 
     useEffect(() => {
         const fetchLanguages = async () => {
@@ -281,6 +287,7 @@ function EditForm({ episode, onUpdate }) {
             meta_title: metaTitle,
             meta_description: metaDesc,
             language_id: selectedLanguage,
+            jsCode: jsCode,
         };
 
         onUpdate(updatedEpisode);
@@ -420,6 +427,14 @@ function EditForm({ episode, onUpdate }) {
                     <textarea
                         value={articleDescription}
                         onChange={(e) => setArticleDescription(e.target.value)}
+                    ></textarea>
+                </label>
+                <br />
+                <label>
+                    JS Code:
+                    <textarea
+                        value={jsCode}
+                        onChange={(e) => setJSCode(e.target.value)}
                     ></textarea>
                 </label>
                 <br />

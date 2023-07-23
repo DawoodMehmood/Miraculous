@@ -17,11 +17,11 @@ export default function DefaultLayout() {
 			} catch (error) {
 				if (error.response.status === 401) {
 					localStorage.removeItem('user');
-					window.location.href = '/';
+					<Navigate to="/" />;
 				}
 			}
 		})();
-	}, [setUser]);
+	}, []);
 
 	// if user is not logged in, redirect to login page
 	if (!user) {

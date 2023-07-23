@@ -54,7 +54,7 @@
     font-weight: 700;
 }
 
-.managedBy a {
+.managedByLink {
     color: #08d;
     text-decoration: none;
 }
@@ -126,10 +126,6 @@
 
 /* Specials Screen */
 
-.specials-content {
-    padding: 25px 30px;
-}
-
 .specials-grid {
     width: 100%;
     display: flex;
@@ -140,15 +136,6 @@
     padding-left: 10px;
 }
 
-@media only screen and (max-width: 768px) {
-    .specials-grid {
-        justify-content: center;
-        padding-left: 0;
-    }
-    .specials-content {
-        padding: 25px 20px;
-    }
-}
 
 
 .special-card-container {
